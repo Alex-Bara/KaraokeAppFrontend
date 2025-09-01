@@ -15,6 +15,8 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
+import android.widget.TextView
+
 
 class RegisterActivity : AppCompatActivity() {
 

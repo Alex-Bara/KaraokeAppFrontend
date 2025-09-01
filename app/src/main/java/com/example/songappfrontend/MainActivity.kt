@@ -1,25 +1,50 @@
 package com.example.songappfrontend
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
-        // Тут можно хранить токен после логина в SharedPreferences
-        val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
-        val token = sharedPref.getString("auth_token", null)
+        val recyclerView = findViewById<RecyclerView>(R.id.songRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        if (token.isNullOrEmpty()) {
-            // Если токена нет → показываем логин
-            startActivity(Intent(this, LoginActivity::class.java))
-        } else {
-            // Если токен есть → кидаем в загрузку песен
-            startActivity(Intent(this, SongUploadActivity::class.java))
+        // временные данные
+        val songs = listOf(
+            Song("Imagine Dragons - Believer"),
+            Song("Queen - Bohemian Rhapsody"),
+            Song("Metallica - Nothing Else Matters"),
+            Song("Linkin Park - Numb")
+        )
+
+        val adapter = SongAdapter(songs)
+        recyclerView.adapter = adapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean { // <-- убрал "?"
+        menuInflater.inflate(R.menu.top_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_profile -> {
+                // TODO: переход в профиль
+                true
+            }
+            R.id.action_settings -> {
+                // TODO: открыть меню/настройки
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-
-        finish() // закрываем MainActivity, чтобы не вернуться назад
     }
 }
