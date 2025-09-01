@@ -1,0 +1,18 @@
+# Gradle
+.gradle/
+build/
+!gradle-wrapper.jar
+
+# Android Studio
+.idea/
+*.iml
+
+# Misc
+local.properties
+*.log
+*.tmp
+
+# Generated files
+captures/
+.externalNativeBuild/
+.cxx/
