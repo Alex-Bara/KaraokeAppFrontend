@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <!-- Мини-обложка песни -->
+        <ImageView
+            android:id="@+id/songImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_music_note"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Play-кнопка поверх картинки -->
+        <ImageButton
+            android:id="@+id/playButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:layout_alignStart="@id/songImage"
+            android:layout_alignTop="@id/songImage"
+            android:layout_alignEnd="@id/songImage"
+            android:layout_alignBottom="@id/songImage"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_play_arrow"
+            android:visibility="gone" />
+
+        <!-- Название песни -->
+        <TextView
+            android:id="@+id/songTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/songImage"
+            android:layout_alignTop="@id/songImage"
+            android:layout_toStartOf="@id/micButton"
+            android:layout_marginStart="12dp"
+            android:text="Название песни"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <!-- Автор -->
+        <TextView
+            android:id="@+id/songAuthor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/songTitle"
+            android:layout_alignStart="@id/songTitle"
+            android:layout_toStartOf="@id/micButton"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Автор"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
+
+        <!-- Кнопка микрофона -->
+        <ImageButton
+            android:id="@+id/micButton"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_mic" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

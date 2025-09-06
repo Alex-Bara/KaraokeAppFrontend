@@ -1,50 +1,43 @@
 package com.example.songappfrontend
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import com.example.songappfrontend.databinding.ActivityMainBinding
+import com.example.songappfrontend.util.SessionManager
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.songRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val navController = findNavController(R.id.nav_host_fragment)
 
-        // временные данные
-        val songs = listOf(
-            Song("Imagine Dragons - Believer"),
-            Song("Queen - Bohemian Rhapsody"),
-            Song("Metallica - Nothing Else Matters"),
-            Song("Linkin Park - Numb")
+        // Тулбар подключаем к NavController
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.songListFragment) // топ-уровень
         )
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
-        val adapter = SongAdapter(songs)
-        recyclerView.adapter = adapter
-    }
+        // Обработка кликов по меню тулбара — делаем в фрагментах (см. SongListFragment)
+        // Здесь — только системная кнопка "назад" (если нужна дополнительная логика)
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean { // <-- убрал "?"
-        menuInflater.inflate(R.menu.top_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_profile -> {
-                // TODO: переход в профиль
-                true
-            }
-            R.id.action_settings -> {
-                // TODO: открыть меню/настройки
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        // Если токен уже есть — прыгаем сразу в список
+        if (SessionManager(this).getAccessToken() != null &&
+            navController.currentDestination?.id == R.id.loginFragment
+        ) {
+            navController.navigate(R.id.action_loginFragment_to_songListFragment)
         }
+
+        // Аппаратная кнопка "назад": пусть работает по графу
+        onBackPressedDispatcher.addCallback(this) { navController.popBackStack() }
     }
 }

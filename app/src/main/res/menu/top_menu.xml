@@ -1,17 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <!-- Иконка профиля -->
     <item
         android:id="@+id/action_profile"
         android:title="Профиль"
-        android:icon="@android:drawable/ic_menu_myplaces"
-        app:showAsAction="always"/>
-
-    <!-- Три точки (или три полоски) -->
+        android:icon="@drawable/ic_user"
+        app:showAsAction="always" />
     <item
-        android:id="@+id/action_settings"
-        android:title="Настройки"
-        android:icon="@android:drawable/ic_menu_manage"
-        app:showAsAction="always"/>
+        android:id="@+id/action_logout"
+        android:title="Выход"
+        app:showAsAction="never" />
 </menu>

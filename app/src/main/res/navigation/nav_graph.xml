@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.songappfrontend.ui.auth.LoginFragment"
+        android:label="Вход" >
+        <action
+            android:id="@+id/action_loginFragment_to_songListFragment"
+            app:destination="@id/songListFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.songappfrontend.ui.auth.RegisterFragment"
+        android:label="Регистрация" />
+
+    <fragment
+        android:id="@+id/songListFragment"
+        android:name="com.example.songappfrontend.ui.songs.SongListFragment"
+        android:label="Треки"/>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.songappfrontend.ui.profile.ProfileFragment"
+        android:label="Профиль"/>
+</navigation>

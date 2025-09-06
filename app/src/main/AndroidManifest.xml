@@ -13,10 +13,6 @@
         android:theme="@style/Theme.SongApp"
         >
 
-        <activity android:name=".SongUploadActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
